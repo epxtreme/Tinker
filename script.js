@@ -197,10 +197,12 @@ function draw() {
     }
 
     if (gameOver) {
-        drawGameOver();
+                drawGameOver();
     } else {
         requestAnimationFrame(draw);
     }
 }
 
 draw();
+
+
