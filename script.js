@@ -8,16 +8,22 @@ document.addEventListener("DOMContentLoaded", function() {
     let touchIdentifierRight = null;
 
     function moveLeft() {
-        console.log("Move left");
-        // Add your logic to move left here
+        leftPressed = true;
+    }
+
+    function stopMoveLeft() {
+        leftPressed = false;
     }
 
     function moveRight() {
-        console.log("Move right");
-        // Add your logic to move right here
+        rightPressed = true;
     }
 
-    // Add event listeners for both click and touch events
+    function stopMoveRight() {
+        rightPressed = false;
+    }
+
+    // Add event listeners for both click and touch events for desktop buttons
     leftButton.addEventListener("click", moveLeft);
     leftButton.addEventListener("touchstart", function(event) {
         event.preventDefault();
@@ -29,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
     leftButton.addEventListener("touchend", function(event) {
         if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierLeft) {
             touchIdentifierLeft = null;
+            stopMoveLeft();
         }
     });
 
@@ -43,10 +50,11 @@ document.addEventListener("DOMContentLoaded", function() {
     rightButton.addEventListener("touchend", function(event) {
         if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierRight) {
             touchIdentifierRight = null;
+            stopMoveRight();
         }
     });
 
-    // Event listeners for mobile buttons
+    // Add event listeners for both click and touch events for mobile buttons
     mobileLeftButton.addEventListener("touchstart", function(event) {
         event.preventDefault();
         touchIdentifierLeft = event.touches[0].identifier;
@@ -55,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
     mobileLeftButton.addEventListener("touchend", function(event) {
         if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierLeft) {
             touchIdentifierLeft = null;
+            stopMoveLeft();
         }
     });
 
@@ -66,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function() {
     mobileRightButton.addEventListener("touchend", function(event) {
         if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierRight) {
             touchIdentifierRight = null;
+            stopMoveRight();
         }
     });
 
@@ -116,12 +126,7 @@ let leftPressed = false;
 
 let gameOver = false;
 
-// Add event listeners for button clicks
-document.getElementById('leftButton').addEventListener('mousedown', () => { leftPressed = true; });
-document.getElementById('leftButton').addEventListener('mouseup', () => { leftPressed = false; });
-document.getElementById('rightButton').addEventListener('mousedown', () => { rightPressed = true; });
-document.getElementById('rightButton').addEventListener('mouseup', () => { rightPressed = false; });
-
+// Add event listeners for key presses
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 
@@ -269,12 +274,10 @@ function draw() {
     }
 
     if (gameOver) {
-                drawGameOver();
+        drawGameOver();
     } else {
         requestAnimationFrame(draw);
     }
 }
 
 draw();
-
-
