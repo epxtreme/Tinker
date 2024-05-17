@@ -1,5 +1,77 @@
-document.getElementById('revealButton').addEventListener('click', () => {
-    document.getElementById('rightPanel').style.display = 'block';
+document.addEventListener("DOMContentLoaded", function() {
+    const leftButton = document.getElementById("leftButton");
+    const rightButton = document.getElementById("rightButton");
+    const mobileLeftButton = document.getElementById("mobileLeftButton");
+    const mobileRightButton = document.getElementById("mobileRightButton");
+
+    let touchIdentifierLeft = null;
+    let touchIdentifierRight = null;
+
+    function moveLeft() {
+        console.log("Move left");
+        // Add your logic to move left here
+    }
+
+    function moveRight() {
+        console.log("Move right");
+        // Add your logic to move right here
+    }
+
+    // Add event listeners for both click and touch events
+    leftButton.addEventListener("click", moveLeft);
+    leftButton.addEventListener("touchstart", function(event) {
+        event.preventDefault();
+        if (event.touches.length === 1) {
+            touchIdentifierLeft = event.touches[0].identifier;
+            moveLeft();
+        }
+    });
+    leftButton.addEventListener("touchend", function(event) {
+        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierLeft) {
+            touchIdentifierLeft = null;
+        }
+    });
+
+    rightButton.addEventListener("click", moveRight);
+    rightButton.addEventListener("touchstart", function(event) {
+        event.preventDefault();
+        if (event.touches.length === 1) {
+            touchIdentifierRight = event.touches[0].identifier;
+            moveRight();
+        }
+    });
+    rightButton.addEventListener("touchend", function(event) {
+        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierRight) {
+            touchIdentifierRight = null;
+        }
+    });
+
+    // Event listeners for mobile buttons
+    mobileLeftButton.addEventListener("touchstart", function(event) {
+        event.preventDefault();
+        touchIdentifierLeft = event.touches[0].identifier;
+        moveLeft();
+    });
+    mobileLeftButton.addEventListener("touchend", function(event) {
+        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierLeft) {
+            touchIdentifierLeft = null;
+        }
+    });
+
+    mobileRightButton.addEventListener("touchstart", function(event) {
+        event.preventDefault();
+        touchIdentifierRight = event.touches[0].identifier;
+        moveRight();
+    });
+    mobileRightButton.addEventListener("touchend", function(event) {
+        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierRight) {
+            touchIdentifierRight = null;
+        }
+    });
+
+    document.getElementById('revealButton').addEventListener('click', () => {
+        document.getElementById('rightPanel').style.display = 'block';
+    });
 });
 
 // The game script
