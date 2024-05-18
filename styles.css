@@ -41,7 +41,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#revealButton {
+#revealButton,
+#tryAgainButton {
     display: none;
     margin-top: 10px;
 }
