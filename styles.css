@@ -5,18 +5,21 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-
-    /* 🌄 Background Image */
     background-image: url('background.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #gameContainer {
     display: flex;
-    align-items: flex-start;
+    flex-direction: row; /* Layout canvas and message side-by-side */
     justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 10px;
+    flex-wrap: wrap; /* Allows wrapping on small screens */
 }
 
 #gameArea {
@@ -26,38 +29,87 @@ body {
 #gameCanvas {
     border: 1px solid #000;
     margin-bottom: 10px;
+    touch-action: none; /* Important for mobile responsiveness */
 }
 
 #controls {
     margin-top: 10px;
 }
 
-#controls button {
-    margin: 0 5px;
+#controls button,
+#mobileControls button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ff66cc;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#mobileControls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
 #rightPanel {
     display: none;
-    width: 200px;
-    margin-left: 20px;
-    background-color: #fff;
-    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#updateBox {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 204, 0.95);
+    border: 1px solid #cccc00;
+    border-radius: 10px;
+    color: #333;
+    font-size: 16px;
+    box-shadow: 0 0 10px rgba(204, 204, 0, 0.2);
 }
 
 #revealButton,
 #tryAgainButton {
     display: none;
     margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    background-color: #66ccff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
-/* ❤️ Heart Counter Styling */
 #heartCounter {
     font-size: 18px;
-    color: #e60026; /* Bright heart red */
+    color: #e60026;
     font-weight: bold;
     margin: 10px 0;
     display: block;
     text-align: center;
+}
+
+/* Optional: Make everything responsive on small screens */
+@media (max-width: 768px) {
+    #gameContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #rightPanel,
+    #updateBox {
+        max-width: 90%;
+    }
 }
