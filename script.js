@@ -1,15 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const leftButton = document.getElementById("leftButton");
-    const rightButton = document.getElementById("rightButton");
     const mobileLeftButton = document.getElementById("mobileLeftButton");
     const mobileRightButton = document.getElementById("mobileRightButton");
     const revealButton = document.getElementById('revealButton');
     const tryAgainButton = document.getElementById('tryAgainButton');
     const heartCounterElement = document.getElementById('heartCounter');
-    const surpriseImage = document.getElementById('surpriseImage'); // 🎁 image element
-
-    let touchIdentifierLeft = null;
-    let touchIdentifierRight = null;
+    const surpriseImage = document.getElementById('surpriseImage');
 
     function moveLeft() {
         leftPressed = true;
@@ -27,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
         rightPressed = false;
     }
 
-    // Touch events for mobile buttons
     if (mobileLeftButton) {
         mobileLeftButton.addEventListener("touchstart", (e) => {
             e.preventDefault();
@@ -58,13 +52,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 👇 Updated code for revealButton click event
     revealButton.addEventListener('click', () => {
         document.getElementById('rightPanel').style.display = 'block';
         if (surpriseImage) {
             surpriseImage.style.display = 'block';
         }
-
         const updateBox = document.getElementById('updateBox');
         if (updateBox) {
             updateBox.style.display = 'block';
@@ -235,7 +227,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const textMetrics = ctx.measureText(text);
         const textWidth = textMetrics.width;
         const textHeight = parseInt(ctx.font);
-
         const x = (canvas.width - textWidth) / 2;
         const y = (canvas.height - textHeight) / 2;
         ctx.fillText(text, x, y);
