@@ -11,6 +11,10 @@
         <div id="gameArea">
             <h1>Collect all the hearts to get your Bday Gift</h1>
             <canvas id="gameCanvas" width="480" height="320"></canvas>
+
+            <!-- ❤️ Heart Counter -->
+            <p id="heartCounter">Hearts Collected: 0 / 33 ❤️</p>
+
             <div id="controls">
                 <button id="leftButton">Left</button>
                 <button id="rightButton">Right</button>
@@ -20,13 +24,24 @@
                 </div>
             </div>
         </div>
+
         <div id="rightPanel">
             <h2>Hello luv🤍</h2>
-            <p id="messageParagraph">Happy 18th Birthday, Tinker✨! I hope you have a wonderful day filled with joy and love. Have fun and enjoy your special day! And when u feel down or sad u can come back to this site and know tht i will always love u even if we have fights or stuff like and tht i will always wait for u n be with u no matter what, luv 🖤 EP</p>
+            <p id="messageParagraph">
+                Happy 18th Birthday, Tinker✨! I hope you have a wonderful day filled with joy and love. 
+                Have fun and enjoy your special day! And when u feel down or sad u can come back to this 
+                site and know tht i will always love u even if we have fights or stuff like and tht i 
+                will always wait for u n be with u no matter what, luv 🖤 EP
+            </p>
+
+            <!-- 🎁 Surprise Image -->
+            <img id="surpriseImage" src="surprise.jpg" alt="Surprise!" style="display: none; width: 100%; border-radius: 10px; margin-top: 10px;" />
         </div>
     </div>
+
     <button id="revealButton">!!Surprise!!</button>
     <button id="tryAgainButton">Try Again</button>
+
     <script src="script.js"></script>
 </body>
 </html>

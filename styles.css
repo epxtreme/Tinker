@@ -4,8 +4,13 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
     font-family: Arial, sans-serif;
+
+    /* 🌄 Background Image */
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #gameContainer {
@@ -45,4 +50,14 @@ body {
 #tryAgainButton {
     display: none;
     margin-top: 10px;
+}
+
+/* ❤️ Heart Counter Styling */
+#heartCounter {
+    font-size: 18px;
+    color: #e60026; /* Bright heart red */
+    font-weight: bold;
+    margin: 10px 0;
+    display: block;
+    text-align: center;
 }

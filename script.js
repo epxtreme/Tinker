@@ -1,10 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const leftButton = document.getElementById("leftButton");
     const rightButton = document.getElementById("rightButton");
     const mobileLeftButton = document.getElementById("mobileLeftButton");
     const mobileRightButton = document.getElementById("mobileRightButton");
     const revealButton = document.getElementById('revealButton');
     const tryAgainButton = document.getElementById('tryAgainButton');
+    const heartCounterElement = document.getElementById('heartCounter');
+    const surpriseImage = document.getElementById('surpriseImage'); // 🎁 image element
 
     let touchIdentifierLeft = null;
     let touchIdentifierRight = null;
@@ -25,71 +27,18 @@ document.addEventListener("DOMContentLoaded", function() {
         rightPressed = false;
     }
 
-    // Add event listeners for both click and touch events for desktop buttons
-    leftButton.addEventListener("click", moveLeft);
-    leftButton.addEventListener("touchstart", function(event) {
-        event.preventDefault();
-        if (event.touches.length === 1) {
-            touchIdentifierLeft = event.touches[0].identifier;
-            moveLeft();
-        }
-    });
-    leftButton.addEventListener("touchend", function(event) {
-        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierLeft) {
-            touchIdentifierLeft = null;
-            stopMoveLeft();
-        }
-    });
-
-    rightButton.addEventListener("click", moveRight);
-    rightButton.addEventListener("touchstart", function(event) {
-        event.preventDefault();
-        if (event.touches.length === 1) {
-            touchIdentifierRight = event.touches[0].identifier;
-            moveRight();
-        }
-    });
-    rightButton.addEventListener("touchend", function(event) {
-        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierRight) {
-            touchIdentifierRight = null;
-            stopMoveRight();
-        }
-    });
-
-    // Add event listeners for both click and touch events for mobile buttons
-    mobileLeftButton.addEventListener("touchstart", function(event) {
-        event.preventDefault();
-        touchIdentifierLeft = event.touches[0].identifier;
-        moveLeft();
-    });
-    mobileLeftButton.addEventListener("touchend", function(event) {
-        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierLeft) {
-            touchIdentifierLeft = null;
-            stopMoveLeft();
-        }
-    });
-
-    mobileRightButton.addEventListener("touchstart", function(event) {
-        event.preventDefault();
-        touchIdentifierRight = event.touches[0].identifier;
-        moveRight();
-    });
-    mobileRightButton.addEventListener("touchend", function(event) {
-        if (event.changedTouches.length === 1 && event.changedTouches[0].identifier === touchIdentifierRight) {
-            touchIdentifierRight = null;
-            stopMoveRight();
-        }
-    });
-
+    // 👇 Show right panel and image on reveal
     revealButton.addEventListener('click', () => {
         document.getElementById('rightPanel').style.display = 'block';
+        if (surpriseImage) {
+            surpriseImage.style.display = 'block';
+        }
     });
 
     tryAgainButton.addEventListener('click', () => {
         resetGame();
     });
 
-    // The game script
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -118,6 +67,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let gameOver = false;
 
+    const totalHearts = brickRowCount * brickColumnCount;
+    let collectedHearts = 0;
+
+    function updateHeartCounter() {
+        heartCounterElement.textContent = `Hearts Collected: ${collectedHearts} / ${totalHearts} ❤️`;
+    }
+
     function initBricks() {
         bricks = [];
         for (let c = 0; c < brickColumnCount; c++) {
@@ -138,10 +94,15 @@ document.addEventListener("DOMContentLoaded", function() {
         leftPressed = false;
         gameOver = false;
         revealedMessage = '';
+        collectedHearts = 0;
+        updateHeartCounter();
         initBricks();
         tryAgainButton.style.display = 'none';
         revealButton.style.display = 'none';
         document.getElementById('rightPanel').style.display = 'none';
+        if (surpriseImage) {
+            surpriseImage.style.display = 'none';
+        }
         draw();
     }
 
@@ -172,6 +133,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                         dy = -dy;
                         b.status = 0;
+                        collectedHearts++;
+                        updateHeartCounter();
                     }
                 }
             }
