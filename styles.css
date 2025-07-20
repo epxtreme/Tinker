@@ -10,16 +10,21 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    color: white; /* Ensures default text is visible */
 }
 
 #gameContainer {
     display: flex;
-    flex-direction: row; /* Layout canvas and message side-by-side */
+    flex-direction: row;
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
     padding: 10px;
-    flex-wrap: wrap; /* Allows wrapping on small screens */
+    flex-wrap: wrap;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent box */
+    border: 2px solid #ff66cc;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #ff66cc;
 }
 
 #gameArea {
@@ -27,9 +32,10 @@ body {
 }
 
 #gameCanvas {
-    border: 1px solid #000;
+    border: 2px solid #ffffff;
     margin-bottom: 10px;
-    touch-action: none; /* Important for mobile responsiveness */
+    touch-action: none;
+    background-color: #111; /* Ensure canvas background is dark */
 }
 
 #controls {
@@ -57,21 +63,22 @@ body {
 
 #rightPanel {
     display: none;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(30, 30, 30, 0.95); /* Dark mode */
     padding: 15px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #888;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     max-width: 300px;
     width: 100%;
     box-sizing: border-box;
     border-radius: 10px;
+    color: white;
 }
 
 #updateBox {
     display: none;
     margin-top: 20px;
     padding: 15px;
-    background-color: rgba(255, 255, 204, 0.95);
+    background-color: rgba(255, 255, 204, 0.95); /* Light yellow */
     border: 1px solid #cccc00;
     border-radius: 10px;
     color: #333;
@@ -101,7 +108,6 @@ body {
     text-align: center;
 }
 
-/* Optional: Make everything responsive on small screens */
 @media (max-width: 768px) {
     #gameContainer {
         flex-direction: column;
