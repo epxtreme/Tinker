@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let x, y, dx, dy;
 
     const paddleHeight = 10;
-    const paddleWidth = 75;
+    const paddleWidth = 120;
     let paddleX;
 
     const brickRowCount = 3;
