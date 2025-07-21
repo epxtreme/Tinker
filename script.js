@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tryAgainButton = document.getElementById('tryAgainButton');
     const heartCounterElement = document.getElementById('heartCounter');
     const surpriseImage = document.getElementById('surpriseImage');
+    const bgMusic = document.getElementById("bgMusic");
 
     function moveLeft() {
         leftPressed = true;
@@ -60,6 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const updateBox = document.getElementById('updateBox');
         if (updateBox) {
             updateBox.style.display = 'block';
+        }
+
+        // 🎵 Play the background music on reveal
+        if (bgMusic) {
+            bgMusic.volume = 0.5;
+            bgMusic.play().catch(() => {
+                console.log("Music play was blocked. User interaction needed.");
+            });
         }
     });
 
@@ -131,6 +140,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (surpriseImage) {
             surpriseImage.style.display = 'none';
         }
+
+        if (bgMusic && !bgMusic.paused) {
+            bgMusic.pause();
+            bgMusic.currentTime = 0;
+        }
+
         draw();
     }
 
